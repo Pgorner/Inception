@@ -1,12 +1,12 @@
 #!/bin/bash
 
-if service mysql start; then
+if service mariadb start; then
 
     echo "INFO: Started MariaDB as a background service "
     echo "INFO: Changing config"
     sleep 5
 
-    mysql -u root -p"$DB_ROOT_PASSWORD" < /tmp/init.sql
+    mariadb -u root -p"$DB_ROOT_PASSWORD" < /tmp/init.sql
 
 
     echo "INFO: Initialized MariaDB system tables and created database and user."
@@ -22,5 +22,5 @@ else
 fi
 
 # Optionally, you can start the service again here if needed
-mysqld -u root --bind-address=0.0.0.0
+mariadbd -u root --bind-address=0.0.0.0
 

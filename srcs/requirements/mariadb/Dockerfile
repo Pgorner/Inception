@@ -20,7 +20,5 @@ COPY ./conf/my.cnf /etc/mysql/
 # Expose MySQL port (optional, depending on your use case)
 EXPOSE 3306
 
-RUN service mysql start && ./tmp/configure.sh
-
 # Entry point to run the configuration script
 ENTRYPOINT ["/tmp/configure.sh"]
