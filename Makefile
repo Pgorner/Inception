@@ -4,10 +4,10 @@ DATA := ./data
 all: $(ENV_FILE) $(DATA) up
 
 up:
-	@docker-compose -f ./srcs/docker-compose.yml --env-file $(ENV_FILE) up -d --build
+	@docker-compose ./srcs/docker-compose.yml up -d
 
 down:
-	@docker-compose -f ./srcs/docker-compose.yml down
+	@docker-compose ./srcs/docker-compose.yml down
 
 re: clean
 	@$(MAKE) all
