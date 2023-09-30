@@ -1,6 +1,6 @@
 FROM debian:11
 
-RUN apt update && apt upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 ENV PHP_VERSION=7.4
 

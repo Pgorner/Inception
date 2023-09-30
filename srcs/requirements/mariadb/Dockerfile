@@ -2,9 +2,9 @@
 FROM debian:11
 
 # Update the package list and install MariaDB
-RUN apt update \
-	&& apt upgrade -y \
-	&& apt install mariadb-server -y
+RUN apt-get update \
+	&& apt-get upgrade -y \
+	&& apt-get install mariadb-server -y
 
 # Copy the configuration script to the container
 COPY /tools/configure.sh /tmp/configure.sh
