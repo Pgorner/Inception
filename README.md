@@ -57,24 +57,32 @@ Where to start:
     setup: https://www.cs.jhu.edu/~joanne/virtualBox.html
    Things to note:
         - needs 2 CPU in VBox to run otherwise kernel panic
+        - had 10gb at first - said was not enough space during run - changed to 25gb
         - would go to -settings->general->advanced and enable at least Shared Clipboard (Bidirectional) or its a pain to do this
 
     If it aint working follow instructions in the link above.
 
    Download and install docker
+     - sudo apt-get upgrade
      - sudo apt-get update
-     - sudo apt-get docker.io
-     - sudo apt-get docker-compose
+     {- sudo apt-get docker.io}
+     - sudo apt install docker-compose
+   Install make
+     - sudo apt install make
    Download git
      - sudo apt-get install git-all
-  
-      I prefer to code locally to some extent then push, clone in VM and then keep working there
+   SSH
+      -sudo apt install ssh
+   I prefer to code locally to some extent then push, clone in VM and then keep working there
+
+   if VM is redone and Key is not accepted anymore run this on host machine:
+      sed -i '' '6d' ~/.ssh/known_hosts
 
 
 4. MAKEFILE WHATS NEEDED(OR I THINK IS NEEDED):
 
 Targets:
-all: This target is the default one that gets executed when you simply run make. It ensures that Docker is running (check-docker), checks for the existence of the .env file ($(ENV_FILE)), creates necessary data directories ($(DATA)), and starts the project (up). It's convenient for developers because they can initiate the entire project setup with a single command.
+all: This target is the default one that gets executed when you simply run make. It checks for the existence of the .env file ($(ENV_FILE)), creates necessary data directories ($(DATA)), and starts the project (up). It's convenient for developers because they can initiate the entire project setup with a single command.
 
 up: This target uses Docker Compose to launch the services defined in ./srcs/docker-compose.yml. It reads environment variables from the .env file specified in ENV_FILE. This is crucial for starting the project in the correct configuration and environment.
 
@@ -85,8 +93,6 @@ re: This target is a shorthand for cleaning the project (clean) and then rebuild
 logs: This target displays the logs of the services defined in ./srcs/docker-compose.yml. It's helpful for debugging and understanding what's happening inside the running containers.
 
 clean: This target stops and removes all running containers, deletes all images, and removes all Docker volumes. It's a powerful, albeit potentially dangerous, command that ensures a complete cleanup of the Docker environment. It's useful when you want to reclaim disk space and start fresh, but use it cautiously to avoid accidental data loss.
-
-check-docker: This target checks if Docker is running. If not, it attempts to start Docker in the background. This is important because the other targets depend on Docker being operational. The check ensures a smooth experience for developers, alerting them if Docker needs to be started manually.
 
 $(ENV_FILE): This target checks if the .env file exists. If not, it displays an error message and exits. This is useful for ensuring that the necessary configuration file is present before starting the project, preventing potential runtime errors due to missing configuration.
 
