@@ -1,7 +1,7 @@
 ENV_FILE := ./srcs/.env
 DATA := ./data
 
-all: check-docker $(ENV_FILE) $(DATA) up
+all: $(ENV_FILE) $(DATA) up
 
 up:
 	@docker-compose -f ./srcs/docker-compose.yml --env-file $(ENV_FILE) up -d --build
@@ -20,14 +20,6 @@ clean:
 	docker rm $$(docker ps -qa);\
 	docker rmi -f $$(docker images -qa);\
 	docker volume rm $$(docker volume ls -q);\
-
-check-docker:
-	@if ! docker info >/dev/null 2>&1; then \
-		echo "Docker is not running. Starting Docker..."; \
-		sudo dockerd & \
-		sleep 15; \
-	fi
-
 
 $(ENV_FILE):
 	@echo "Please create the .env file at $(ENV_FILE) with the required environment variables."

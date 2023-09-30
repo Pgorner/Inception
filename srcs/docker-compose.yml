@@ -27,6 +27,10 @@ services:
       - wordpress_files:/var/www/html
     build:
       context: ./requirements/wordpress
+    ports:
+      - "9000:9000"
+    depends_on:
+      - mariadb
     networks:
       - inception
     restart: always
@@ -41,6 +45,8 @@ services:
       context: ./requirements/nginx
     ports:
       - "443:443"
+    depends_on:
+      - wordpress
     networks:
       - inception
     restart: always
