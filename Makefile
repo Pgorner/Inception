@@ -24,9 +24,10 @@ clean:
 check-docker:
 	@if ! docker info >/dev/null 2>&1; then \
 		echo "Docker is not running. Starting Docker..."; \
-		dockerd & \
+		sudo dockerd & \
 		sleep 15; \
 	fi
+
 
 $(ENV_FILE):
 	@echo "Please create the .env file at $(ENV_FILE) with the required environment variables."
