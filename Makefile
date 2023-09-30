@@ -4,7 +4,7 @@ DATA := ./data
 all: $(ENV_FILE) $(DATA) up
 
 up:
-	@docker-compose ./srcs/docker-compose.yml up -d
+	@sudo docker compose -f ./srcs/docker-compose.yml --env-file $(ENV_FILE) up -d --build
 
 down:
 	@docker-compose ./srcs/docker-compose.yml down
