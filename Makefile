@@ -6,7 +6,7 @@
 #    By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/28 16:11:11 by pgorner           #+#    #+#              #
-#    Updated: 2023/09/30 14:20:40 by pgorner          ###   ########.fr        #
+#    Updated: 2023/09/30 14:22:51 by pgorner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,16 @@ DATA := ./data
 all: $(ENV_FILE) $(DATA) up
 
 up:
-	@sudo docker compose -f ./srcs/docker-compose.yml --env-file $(ENV_FILE) up -d --build
+	@sudo docker-compose -f ./srcs/docker-compose.yml --env-file $(ENV_FILE) up -d --build
 
 down:
-	@sudo docker compose -f ./srcs/docker-compose.yml down
+	@sudo docker-compose -f ./srcs/docker-compose.yml down
 
 re: clean
 	all
 
 logs:
-	@sudo docker compose -f ./srcs/docker-compose.yml logs
+	@sudo docker-compose -f ./srcs/docker-compose.yml logs
 
 clean:
 	@sudo docker stop $$(docker ps -qa);\
