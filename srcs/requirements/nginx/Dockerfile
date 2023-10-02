@@ -16,7 +16,7 @@ RUN openssl req -x509 -sha256 -newkey rsa:4096 -days 365 -nodes \
        -keyout /etc/nginx/ssl/ssl_priv_key.key \
        -subj "/CN=nginx"
 
-COPY ./tools/nginx_error.sh /tmp/nginx_error.sh 
-RUN chmod +x /tmp/nginx_error.sh
+COPY ./tools/nginx_configure.sh /tmp/nginx_configure.sh 
+RUN chmod +x /tmp/nginx_configure.sh
 
-ENTRYPOINT ["/tmp/nginx_error.sh"]
+ENTRYPOINT ["/tmp/nginx_configure.sh"]
