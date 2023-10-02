@@ -8,13 +8,10 @@ RUN apt-get install php7.4-fpm -y
 RUN apt-get install php7.4-mysql -y
 RUN apt-get install php7.4-mysqli -y
 RUN apt-get install curl -y
-# for the mysqli admin  check for mariadb
+# for the mysqli admin check for mariadb
 RUN apt-get install mariadb-client -y
 
 EXPOSE 9000
-
-RUN rm -f /etc/php/7.4/fpm/pool.d/www.conf
-COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 COPY ./tools/wp_configure.sh /tmp/wp_configure.sh
 RUN chmod +x /tmp/wp_configure.sh
