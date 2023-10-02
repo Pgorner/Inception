@@ -3,15 +3,25 @@ How to set up the 42 Inception project.
 
 Inception/
 │
+
 ├── Makefile
+
 │
+
 ├── srcs/
+
 │
+
 ├── docker-compose.yml
+
 │
+
 ├── .env
+
 │
+
 ├── requirements/
+
 │
 ├── mariadb/
 │   ├── conf/             <-- Conf folder specific to MariaDB service
