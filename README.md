@@ -1,45 +1,55 @@
 # Inception
 How to set up the 42 Inception project. 
 
-
-Folder structure:
-
 Inception/
 │
 ├── Makefile
-├── srcs/
-│   ├── docker-compose.yml
-│   ├── .env
-│   │
-│   ├── requirements/
-│   │   ├── mariadb/
-│   │   │   ├── conf/   <-- Conf folder specific to MariaDB service
-│   │   │   │   └── (MariaDB-specific conf files)
-│   │   │   ├── Dockerfile
-│   │   │   ├── .dockerignore
-│   │   │   └── tools/   <-- Tools folder specific to MariaDB service
-│   │   │       └── (MariaDB-specific tools and scripts)
-│   │   │
-│   │   ├── nginx/
-│   │   │   ├── conf/   <-- Conf folder specific to Nginx service
-│   │   │   │   └── (Nginx-specific conf files)
-│   │   │   ├── Dockerfile
-│   │   │   ├── .dockerignore
-│   │   │   └── tools/   <-- Tools folder specific to Nginx service
-│   │   │       └── (Nginx-specific tools and scripts)
-│   │   │
-│   │   └── wordpress/
-│   │       ├── conf/   <-- Conf folder specific to WordPress service
-│   │       │   └── (WordPress-specific conf files)
-│   │       ├── Dockerfile
-│   │       ├── .dockerignore
-│   │       └── tools/   <-- Tools folder specific to WordPress service
-│   │           └── (WordPress-specific tools and scripts)
-│   │
-│   └── tools/  <-- General tools directory, if you have tools shared across services
-│       └── (General tools and scripts used by multiple services)
 │
-└── (Other project files and directories, in this case not needed)
+├── srcs/
+│
+├── docker-compose.yml
+│
+├── .env
+│
+├── requirements/
+│
+├── mariadb/
+│   ├── conf/             <-- Conf folder specific to MariaDB service
+│   │   └── (MariaDB-specific conf files)
+│   │
+│   ├── Dockerfile
+│   │
+│   ├── .dockerignore
+│   │
+│   └── tools/            <-- Tools folder specific to MariaDB service
+│       └── (MariaDB-specific tools and scripts)
+│
+├── nginx/
+│   ├── conf/             <-- Conf folder specific to Nginx service
+│   │   └── (Nginx-specific conf files)
+│   │
+│   ├── Dockerfile
+│   │
+│   ├── .dockerignore
+│   │
+│   └── tools/            <-- Tools folder specific to Nginx service
+│       └── (Nginx-specific tools and scripts)
+│
+└── wordpress/
+    ├── conf/             <-- Conf folder specific to WordPress service
+    │   └── (WordPress-specific conf files)
+    │
+    ├── Dockerfile
+    │
+    ├── .dockerignore
+    │
+    └── tools/            <-- Tools folder specific to WordPress service
+        └── (WordPress-specific tools and scripts)
+
+└── tools/                  <-- General tools directory, if you have tools shared across services
+    └── (General tools and scripts used by multiple services)
+
+└── (Other project files and directories, if needed)
 
 
 Where to start:
