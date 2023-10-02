@@ -21,6 +21,4 @@ COPY /conf/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./tools/nginx_error.sh /tmp/nginx_error.sh 
 RUN chmod +x /tmp/nginx_error.sh
 
-# CMD ["nginx", "-g", "daemon off;"]
-
 ENTRYPOINT ["/tmp/nginx_error.sh"]
