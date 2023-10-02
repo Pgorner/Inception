@@ -1,7 +1,8 @@
-version: '3'
+version: '3.8'
 
 networks:
   inception:
+    name: inception
     driver:
       bridge
 
@@ -50,12 +51,14 @@ services:
 
 
   wordpress:
+    depends_on:
+      - mariadb
     container_name:
       wordpress
     env_file:
       - .env
     volumes:
-      - wordpress_files:/var/www/html/wordpress
+      - wordpress_files:/var/www/html
     build:
       context:
         ./requirements/wordpress
@@ -67,12 +70,14 @@ services:
       always
 
   nginx:
+    depends_on:
+      - wordpress
     container_name:
       nginx
     env_file:
       - .env
     volumes:
-      - wordpress_files:/var/www/html/wordpress
+      - wordpress_files:/var/www/html
     build:
       context:
         ./requirements/nginx
@@ -82,5 +87,10 @@ services:
       - "443:443"
     networks:
       - inception
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     restart:
       always

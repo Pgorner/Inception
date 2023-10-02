@@ -1,31 +1,25 @@
 FROM debian:11
 
-RUN apt-get update && apt-get upgrade -y
-
-ENV PHP_VERSION=7.4
+RUN apt-get update -y 
+RUN apt-get upgrade -y
 
 # Install necessary software
-RUN apt-get update \
-    && apt-get install -y \
-    php${PHP_VERSION}-fpm \
-    php${PHP_VERSION}-cli \
-    php${PHP_VERSION}-mysql \
-    php${PHP_VERSION}-mysqli \
-    php${PHP_VERSION}-common \
-    php${PHP_VERSION}-gd \
-    php${PHP_VERSION}-mbstring \
-    php${PHP_VERSION}-xml -y\
-    php${PHP_VERSION}-zip \
-    mariadb-client \
-    wget \
-    unzip
-
+RUN apt-get install php7.4-fpm -y
+RUN apt-get install php7.4-mysql -y
+RUN apt-get install php7.4-mysqli -y
 RUN apt-get install curl -y
+# for the mysqli admin  check for mariadb
+RUN apt-get install mariadb-client -y
+
+EXPOSE 9000
+
+RUN rm -f /etc/php/7.4/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+
+COPY ./tools/wp_configure.sh /tmp/wp_configure.sh
+RUN chmod +x /tmp/wp_configure.sh
 
 RUN mkdir -p /var/www/html/
 WORKDIR /var/www/html/
 
-COPY ./tools/configure.sh /tmp/configure.sh
-RUN chmod +x /tmp/configure.sh
-
-ENTRYPOINT ["/tmp/configure.sh"]
+ENTRYPOINT ["/tmp/wp_configure.sh"]

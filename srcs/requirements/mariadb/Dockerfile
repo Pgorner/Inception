@@ -1,24 +1,16 @@
 # Use Debian 11 as the base image
 FROM debian:11
 
-# Update the package list and install MariaDB
-RUN apt-get update \
-	&& apt-get upgrade -y \
-	&& apt-get install -y mariadb-server mariadb-client
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install mariadb-server -y
+RUN apt-get install mariadb-client -y
 
-# Copy the configuration script to the container
-COPY /tools/configure.sh /tmp/configure.sh
-RUN chmod +x /tmp/configure.sh
+# COPY /conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY /conf/init.sql /tmp/init.sql
-RUN chmod +x /tmp/init.sql
+COPY /conf/my.cnf /etc/mysql/
 
-RUN mkdir -p /etc/mysql
-RUN rm -f /etc/mysql/my.cnf
-COPY ./conf/my.cnf /etc/mysql/
+COPY /tools/mdb_configure.sh /tmp/mdb_configure.sh
+RUN chmod +x /tmp/mdb_configure.sh
 
-# Expose MySQL port (optional, depending on your use case)
-EXPOSE 3306
-
-# Entry point to run the configuration script
-ENTRYPOINT ["/tmp/configure.sh"]
+ENTRYPOINT ["/tmp/mdb_configure.sh"]
