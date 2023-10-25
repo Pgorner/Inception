@@ -82,13 +82,13 @@ fi
 
 echo "-------------------------------------------------"
 
-echo "INFO: Installing theme"
+# echo "INFO: Installing theme"
 
-wp theme install blockskit-base --activate --allow-root --quiet
+# wp theme install blockskit-base --activate --allow-root --quiet
 
-echo "INFO: Installed theme"
+# echo "INFO: Installed theme"
 
-echo "-------------------------------------------------"
+# echo "-------------------------------------------------"
 
 echo "INFO: Making /run/php dir"
 
