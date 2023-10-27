@@ -78,6 +78,7 @@ services:
       - .env
     volumes:
       - wordpress_files:/var/www/html
+      - wordpress_db:/var/lib/mysql
     build:
       context:
         ./requirements/nginx
