@@ -26,7 +26,6 @@ echo "INFO: Changing NGINX configuration"
 
 echo "server {\
     listen 443 ssl http2;\
-    listen [::]:443 ssl http2;\
     server_name pgorner.42.fr;\
     root /var/www/html;\
     index index.php;\
