@@ -32,9 +32,28 @@ volumes:
 
 
 services:
+
+  check_env:
+    image: debian:11
+    env_file:
+      - .env
+    environment:
+      - DB_DATABASE
+      - DB_HOSTNAME
+      - DB_USER
+      - WP_ADMIN_USR
+      - WP_ADMIN_EMAIL
+      - WP_USER_NAME
+      - WP_USER_EMAIL
+    networks:
+      - inception
+    entrypoint: ["echo", "Environment variables are set."] 
+
   mariadb:
     container_name: 
       mariadb
+    depends_on:
+      - check_env
     env_file:
       - .env
     volumes:
