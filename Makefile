@@ -6,7 +6,7 @@
 #    By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/28 16:11:11 by pgorner           #+#    #+#              #
-#    Updated: 2023/10/31 14:52:32 by pgorner          ###   ########.fr        #
+#    Updated: 2023/10/31 14:59:25 by pgorner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ re: clean all
 logs:
 	@docker-compose -f ./srcs/docker-compose.yml logs
 
-clean:
+fclean:
 	@rm -rf $(HOME)/data/wordpress_db
 	@rm -rf $(HOME)/data/wordpress_files
 	@docker system prune --all --force --volumes
@@ -43,6 +43,14 @@ clean:
 	@docker network prune --force
 	@docker volume rm `docker volume ls -q`
 	@echo "MADE CLEAN"
+
+
+eval:
+	@docker stop $(docker ps -qa); \
+    docker rm $(docker ps -qa); \
+    docker rmi -f $(docker images -qa); \
+    docker volume rm $(docker volume ls -q); \
+    docker network rm $(docker network ls -q) 2>/dev/null
 
 $(ENV_FILE):
 	@echo "Please create the .env file at $(ENV_FILE) with the required environment variables:"
