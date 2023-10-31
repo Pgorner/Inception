@@ -24,7 +24,7 @@ Where to start:
    Download and install docker
      - sudo apt-get upgrade
      - sudo apt-get update
-     {- sudo apt-get docker.io}
+     - {- sudo apt-get docker.io}
      - sudo apt install docker-compose
    Install make
      - sudo apt install make
@@ -32,6 +32,7 @@ Where to start:
      - sudo apt-get install git-all
    SSH
       -sudo apt install ssh
+  
    I prefer to code locally to some extent then push, clone in VM and then keep working there
 
    if VM is redone and Key is not accepted anymore run this on host machine:
