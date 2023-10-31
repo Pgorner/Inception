@@ -6,17 +6,26 @@
 #    By: pgorner <pgorner@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/28 16:11:11 by pgorner           #+#    #+#              #
-#    Updated: 2023/10/28 14:17:53 by pgorner          ###   ########.fr        #
+#    Updated: 2023/10/31 14:52:32 by pgorner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ENV_FILE := ./srcs/.env
 DATA := ./data
+HOSTS_ENTRY := "127.0.0.1 pgorner.42.fr"
 
-all: $(ENV_FILE) $(DATA) up
+all: $(ENV_FILE) $(DATA) up update-hosts
 
 up:
 	@docker-compose -f ./srcs/docker-compose.yml --env-file $(ENV_FILE) up -d --build
+
+update-hosts:
+	@if grep -qF $(HOSTS_ENTRY) /etc/hosts; then \
+        echo "Host entry already exists"; \
+    else \
+        echo $(HOSTS_ENTRY) | sudo tee -a /etc/hosts; \
+        echo "Host entry added successfully"; \
+    fi
 
 down:
 	@docker-compose -f ./srcs/docker-compose.yml down
